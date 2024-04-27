@@ -3,8 +3,6 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace minesweeper
 {
-
-
     public partial class Form1 : Form
     {
 
@@ -168,12 +166,14 @@ namespace minesweeper
             // 左クリックで旗以外をクリックした時
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left && block.State != BlockState.Flagged)
             {
+                // 爆弾の場合ゲームオーバー
                 if (block.IsBomb)
                 {
                     GameOver(block);
                     return;
                 }
 
+                // 数字ブロックの場合は一括で開く
                 if (block.State == BlockState.Opened && CanBlockOpen(block))
                 {
                     OpenBlock(block, true);
@@ -256,7 +256,6 @@ namespace minesweeper
             {
                 foreach (var target in GetAroundBlok(block))
                 {
-
                     if (target.State == BlockState.Closed)
                     {
                         target.IsPressed = true;
@@ -295,7 +294,6 @@ namespace minesweeper
                     OpenBlock(target, isOpenBomb);
                 }
             }
-
         }
 
         /// <summary>
@@ -421,7 +419,4 @@ namespace minesweeper
             this.btnGame.BackgroundImage = Resources.button_default;
         }
     }
-
-
-
 }
