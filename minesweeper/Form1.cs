@@ -59,8 +59,6 @@ namespace minesweeper
             this.txtBombTimer.Value = "0";
             timer.Stop();
             this.gameState = GameStatus.Ready;
-
-
             blockArea.Controls.Clear();
             for (int x = 0; x < xLength; x++)
             {
@@ -116,7 +114,6 @@ namespace minesweeper
                 foreach (var target in GetAroundBlok(block))
                 {
                     if (target.IsBomb) block.BombCount++;
-
                 }
             }
 
@@ -132,8 +129,6 @@ namespace minesweeper
         private List<Block> GetAroundBlok(Block block)
         {
             List<Block> blocks = new List<Block>();
-
-
             for (int x = -1; x <= 1; x++)
             {
                 for (int y = -1; y <= 1; y++)
@@ -237,7 +232,6 @@ namespace minesweeper
         {
             foreach (Control control in blockArea.Controls)
             {
-
                 if (control == null && (control is not Block)) return;
                 Block block = (Block)control;
                 if (block.State == BlockState.Closed && current != control)
@@ -320,7 +314,6 @@ namespace minesweeper
                     flagCount++;
                 }
             }
-
             return block.BombCount == flagCount;
         }
 
@@ -350,8 +343,6 @@ namespace minesweeper
                     unmacthCount++;
                 }
             }
-
-
             // 間違った旗の数がないかつ全ての爆弾以外のブロックが開かれている場合はクリア
             if (unmacthCount == 0 && openCount == xLength * yLength - bombCount)
             {
@@ -374,7 +365,6 @@ namespace minesweeper
             {
                 this.txtBombCount.Value = (bombCount - flagCount).ToString();
             }
-
         }
 
         /// <summary>
@@ -419,7 +409,6 @@ namespace minesweeper
             this.btnGame.BackgroundImage = Resources.button_gameorver;
             this.gameState = GameStatus.GameEnd;
         }
-
 
         /// <summary>
         /// ゲームリセット
